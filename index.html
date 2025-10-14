@@ -11,10 +11,10 @@
     <header>
         <nav aria-label="Main Navigation">
             <ul class="nav-list">
-                <li><a href="#dashboar" class="nav-link">Dashboard</a></li>
+                <li><a href="#dashboard" class="nav-link">Dashboard</a></li>
                 <li><a href="#records" class="nav-link">Records</a></li>
                 <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#add-transactions" class="nav-link">Transactions</a></li>
+                <li><a href="#add-transaction" class="nav-link">Transactions</a></li>
                 <li><a href="#settings" class="nav-link">Settings</a></li>
             </ul>
         </nav>
@@ -39,11 +39,79 @@
                 <thead>
                     <tr>
                         <th data-sort="description">Description</th>
-                        <th data-sort="description">Description</th>
+                        <th data-sort="amount">Amount</th>
+                        <th data-sort="category">Category</th>
+                        <th data-sort="date">Date</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
+                <tbody>
+                    <!-- Transactionn Records rows will be dynamically inserted here -->
+                </tbody>
             </table>
          </section>
+
+         <!-- Add/Edit Transaction Section -->
+        <section id="add-transaction">
+            <h1>Add Transaction</h1>
+            <form id="transaction-form">
+                <label for="description">Description</label>
+                <input type="text" id="description" name="description" required>
+                <small class="error" aria-live="polite"></small>
+
+                <label for="amount">Amount</label>
+                <input type="number" id="amount" name="amount" step="0.01" required>
+                <small class="error" aria-live="polite"></small>
+
+                <label for="category">Category</label>
+                <select id="category" name="category" required>
+                    <option value="">Select Category</option>
+                    <option value="Food">Food</option>
+                    <option value="Books">Books</option>
+                    <option value="Transport">Transport</option>
+                    <option value="Entertainment">Entertainment</option>
+                    <option value="Fees">Fees</option>
+                    <option value="Other">Other</option>
+                </select>
+                <small class="error" aria-live="polite"></small>
+
+                <label for="date">Date</label>
+                <input type="date" id="date" name="date" required>
+                <small class="error" aria-live="polite"></small>
+
+                <button type="submit">Save Transaction</button>
+                <button type="reset">Reset</button>
+            </form>
+        </section>
+
+        <!-- Settings Section -->
+        <section id="settings">
+            <h1>Settings</h1>
+            <label for="base-currency">Base Currency</label>
+            <select id="base-currency">
+                <option value="USD">USD</option>
+                <option value="ZAR">ZAR</option>
+                <option value="CFA">RWF</option>
+            </select>
+
+            <label for="spending-cap">Spending Cap</label>
+            <input type="number" id="spending-cap" step="0.01">
+
+            <button id="save-settings">Save Settings</button>
+        </section>
+
+        <!-- About Section -->
+        <section id="about">
+            <h1>About MomoNoSwiping</h1>
+            <p>A responsive Student Finance Tracker to monitor budgets, transactions, and spending habits.</p>
+            <p>Developer: David Achibiri | GitHub: <a href="https://github.com/david-ac1">david-ac1</a> | Email: <a href="mailto:davidachibiri8@gmail.com">davidachibiri8@gmail.com</a></p>
+        </section>
     </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 MomoNoSwiping. All rights reserved.</p>
+    </footer>
+    <script src="main.js" type="module"></script>
 </body>
 </html>
