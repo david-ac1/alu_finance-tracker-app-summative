@@ -3,9 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MomoNoSwiping</title>
+    <title>MomoNoSwiping - Student Finance Tracker</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    
+    <!--Navigation and Header for App-->
+    <header>
+        <nav aria-label="Main Navigation">
+            <ul class="nav-list">
+                <li><a href="#dashboar" class="nav-link">Dashboard</a></li>
+                <li><a href="#records" class="nav-link">Records</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#add-transactions" class="nav-link">Transactions</a></li>
+                <li><a href="#settings" class="nav-link">Settings</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!--Main Page Content-->
+    <main id="main-content">
+        <!-- Dashboard Section -->
+        <section id="dashboard" aria-labelledby="dashboard-heading">
+            <h1>Dashboard</h1>
+            <div class="cards">
+                <div class="card" id="total-spent">Total Spent: 0.00</div>
+                <div class="card" id="transaction-count">Transactions: 0</div>
+                <div class="card" id="top-category">Top Category: None yet</div>
+            </div>
+        </section>
+        <!-- Records Section -->
+         <section id="records" aria-labelledby="records-heading">
+            <h1>Records</h1>
+            <input type="text" id="search-bar" placeholder="Search transactions..." aria-label="Search transactions">
+            <table id="records-table">
+                <thead>
+                    <tr>
+                        <th data-sort="description">Description</th>
+                        <th data-sort="description">Description</th>
+                    </tr>
+                </thead>
+            </table>
+         </section>
+    </main>
 </body>
 </html>
