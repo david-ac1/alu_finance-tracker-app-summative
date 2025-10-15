@@ -40,9 +40,26 @@ function generateId() {
 
 function updateDashboard() {
     const totalSpent = document.getElementById('total-spent');
-    const count = document.getElementById('transaction-count');
+    const countTransactions = document.getElementById('transaction-count');
     const topCategory = document.getElementById('top-category');
 
     const total = state.transactions.reduce((sum, txn) => sum + parseFloat(txn.amount), 0);
-    count.textContent = state.transactions.length;
-}
+    const count = state.transactions.length;
+
+//Compute Top Spending Category
+
+const categoryCount = {};
+state.transactions.forEach(txn => {
+    categoryCount[txn.category] = (categoryCount[txn.category] || 0) + 1;
+});
+
+const topCategoryCount = Object.keys(categoryCount).reduce((a, b) => categoryCount[a] > categoryCount[b] ? a : b, null);
+
+totalSpent.textContent = `Total Spent: $${formatAmount(total)}`;
+countTransactions.textContent = `Transactions: ${count}`;
+topCategory.textContent = `Top Category: ${count === 0 ? 'N/A' : topCategoryCount}`;
+};
+
+//Display Transactions in Table
+
+function displayTransactions() {};
