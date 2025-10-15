@@ -62,4 +62,65 @@ topCategory.textContent = `Top Category: ${count === 0 ? 'N/A' : topCategoryCoun
 
 //Display Transactions in Table
 
-function displayTransactions() {};
+function displayTransactions() {
+    const tbody = document.querySelector('#transaction-table tbody');
+    tbody.innerHTML = '';
+
+    state.transactions.forEach(t => {
+        const tr = document.createElement("tr");
+
+        tr.innerHTML = `
+            <td>${t.description}</td>
+            <td>${formatAmount(t.amount)}</td>
+            <td>${t.category}</td>
+            <td>${t.date}</td>
+            <td>
+                <button class="edit-btn" data-id="${t.id}">Edit</button>
+                <button class="delete-btn" data-id="${t.id}">Delete</button>
+            </td>
+        `;
+        tbody.appendChild(tr);
+    });
+};
+
+//===Form Handling===
+
+const form = document.getElementById('transaction-form');
+
+form.addEventListener('submit', function(e) {
+    e.preventDefault();
+});
+
+//Get Input Values
+
+const description = document.getElementById('description').value.trim();
+const amount = document.getElementById('amount').value;
+const category = document.getElementById('category').value;
+const date = document.getElementById('date').value;
+
+//Simple Validation Logic
+
+let valid = true;
+
+if(!description) {
+    showError('description','Description cannot be empty.');
+    valid = false;
+}
+else clearError('description');
+
+if (!amount || isNaN(amount) || parseFloat(amount) <= 0) {
+        showError('amount', 'Amount must be a positive number.');
+        valid = false;
+    } else clearError('amount');
+
+    if (!category) {
+        showError('category', 'Please select a category.');
+        valid = false;
+    } else clearError('category');
+
+    if (!date) {
+        showError('date', 'Please select a date.');
+        valid = false;
+    } else clearError('date');
+
+    if (!valid) return;
