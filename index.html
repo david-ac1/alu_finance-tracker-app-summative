@@ -201,6 +201,18 @@
                         </div>
                     </div>
 
+                    <div class="settings-section">
+                        <div class="form-group form-group-full">
+                            <label for="import-json" class="form-label">Import Transactions (JSON)</label>
+                            <input type="file" id="import-json" accept=".json" style="padding: 0.5rem; cursor: pointer;">
+                        </div>
+
+                        <div class="form-actions">
+                            <button id="export-csv" class="btn-primary">Export to CSV</button>
+                            <button id="export-json" class="btn-primary">Export to JSON</button>
+                        </div>
+                    </div>
+
                     <div class="form-actions settings-actions">
                         <button id="save-settings" class="btn-success">Save Settings</button>
                     </div>
@@ -232,8 +244,8 @@
                     </div>
 
                     <div class="about-section">
-                        <h3 class="about-heading">Currency Conversion</h3>
-                        <p class="about-paragraph">Seamlessly convert between multiple currencies with custom exchange rates.</p>
+                        <h3 class="about-heading">Data Management</h3>
+                        <p class="about-paragraph">Export to CSV or JSON, import transactions from backup files, and manage your financial data seamlessly.</p>
                     </div>
 
                     <div class="about-footer">
@@ -248,7 +260,6 @@
             </section>
         </main>
     </div>
-
-    <script src="main.js"></script>
+    <script src="scripts/main.js"></script>
 </body>
 </html>
