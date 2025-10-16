@@ -1,0 +1,137 @@
+[
+  {
+    "id": "txn_1696876800000_123",
+    "description": "Lunch at cafeteria",
+    "amount": 12500,
+    "category": "Food",
+    "date": "2025-09-25",
+    "createdAt": "2025-09-25T12:30:00.000Z",
+    "updatedAt": "2025-09-25T12:30:00.000Z"
+  },
+  {
+    "id": "txn_1696790400000_456",
+    "description": "Chemistry textbook",
+    "amount": 8000,
+    "category": "Books",
+    "date": "2025-09-23",
+    "createdAt": "2025-09-23T10:15:00.000Z",
+    "updatedAt": "2025-09-23T10:15:00.000Z"
+  },
+  {
+    "id": "txn_1696617600000_789",
+    "description": "Bus pass",
+    "amount": 4500,
+    "category": "Transport",
+    "date": "2025-09-20",
+    "createdAt": "2025-09-20T08:00:00.000Z",
+    "updatedAt": "2025-09-20T08:00:00.000Z"
+  },
+  {
+    "id": "txn_1696963200000_321",
+    "description": "Coffee with friends",
+    "amount": 8750,
+    "category": "Entertainment",
+    "date": "2025-09-28",
+    "createdAt": "2025-09-28T15:45:00.000Z",
+    "updatedAt": "2025-09-28T15:45:00.000Z"
+  },
+  {
+    "id": "txn_1696531200000_654",
+    "description": "Library fee duplicate duplicate",
+    "amount": 2500,
+    "category": "Fees",
+    "date": "2025-09-19",
+    "createdAt": "2025-09-19T14:20:00.000Z",
+    "updatedAt": "2025-09-19T14:20:00.000Z"
+  },
+  {
+    "id": "txn_1695945600000_987",
+    "description": "Groceries and supplies",
+    "amount": 67400,
+    "category": "Other",
+    "date": "2025-09-15",
+    "createdAt": "2025-09-15T17:30:00.000Z",
+    "updatedAt": "2025-09-15T17:30:00.000Z"
+  },
+  {
+    "id": "txn_1696359600000_111",
+    "description": "Movie tickets",
+    "amount": 2200,
+    "category": "Entertainment",
+    "date": "2025-09-17",
+    "createdAt": "2025-09-17T19:00:00.000Z",
+    "updatedAt": "2025-09-17T19:00:00.000Z"
+  },
+  {
+    "id": "txn_1697049600000_222",
+    "description": "Notebook and pens",
+    "amount": 5990,
+    "category": "Books",
+    "date": "2025-10-01",
+    "createdAt": "2025-10-01T11:00:00.000Z",
+    "updatedAt": "2025-10-01T11:00:00.000Z"
+  },
+  {
+    "id": "txn_1696704000000_333",
+    "description": "Tea at coffee shop",
+    "amount": 4500,
+    "category": "Food",
+    "date": "2025-09-26",
+    "createdAt": "2025-09-26T09:30:00.000Z",
+    "updatedAt": "2025-09-26T09:30:00.000Z"
+  },
+  {
+    "id": "txn_1695859200000_444",
+    "description": "Large textbook purchase",
+    "amount": 340000.00,
+    "category": "Books",
+    "date": "2025-09-14",
+    "createdAt": "2025-09-14T13:15:00.000Z",
+    "updatedAt": "2025-09-14T13:15:00.000Z"
+  },
+  {
+    "id": "txn_1696272000000_555",
+    "description": "Tuition payment",
+    "amount": 150000,
+    "category": "Fees",
+    "date": "2025-09-16",
+    "createdAt": "2025-09-16T09:00:00.000Z",
+    "updatedAt": "2025-09-16T09:00:00.000Z"
+  },
+  {
+    "id": "txn_1697136000000_666",
+    "description": "Breakfast - eggs and toast",
+    "amount": 6250,
+    "category": "Food",
+    "date": "2025-10-02",
+    "createdAt": "2025-10-02T08:15:00.000Z",
+    "updatedAt": "2025-10-02T08:15:00.000Z"
+  },
+  {
+    "id": "txn_1695772800000_777",
+    "description": "Taxi to campus",
+    "amount": 3500,
+    "category": "Transport",
+    "date": "2025-09-13",
+    "createdAt": "2025-09-13T07:45:00.000Z",
+    "updatedAt": "2025-09-13T07:45:00.000Z"
+  },
+  {
+    "id": "txn_1696790400000_888",
+    "description": "Dinner with study group",
+    "amount": 18990,
+    "category": "Entertainment",
+    "date": "2025-09-23",
+    "createdAt": "2025-09-23T20:00:00.000Z",
+    "updatedAt": "2025-09-23T20:00:00.000Z"
+  },
+  {
+    "id": "txn_1697222400000_999",
+    "description": "Campus bookstore purchase",
+    "amount": 7550,
+    "category": "Books",
+    "date": "2025-10-03",
+    "createdAt": "2025-10-03T14:30:00.000Z",
+    "updatedAt": "2025-10-03T14:30:00.000Z"
+  }
+]

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MomoNoSwiping - Regex Andy Validation Tests</title>
+</head>
+<body>
+    <div class="container">
+        <h1>MomoNoSwiping Regex And Validation Test </h1>
+        <div id="stats" class="stats"></div>
+
+        <!-- DESCRIPTION VALIDATION -->
+        <div class="test-suite">
+            <h2>1. Description Validation</h2>
+            <p>Pattern: <code>/^\S(?:.*\S)?$/</code></p>
+            <p style="color: #666; margin-bottom: 1rem;">Rule: No leading/trailing spaces, non-empty</p>
+            <div id="test-description"></div>
+        </div>
+
+        <!-- AMOUNT VALIDATION -->
+        <div class="test-suite">
+            <h2>2. Amount Validation</h2>
+            <p>Pattern: <code>/^(0|[1-9]\d*)(\.\d{1,2})?$/</code></p>
+            <p style="color: #666; margin-bottom: 1rem;">Rule: Positive integers and decimals (max 2 places)</p>
+            <div id="test-amount"></div>
+        </div>
+
+        <!-- DATE VALIDATION -->
+        <div class="test-suite">
+            <h2>3. Date Validation</h2>
+            <p>Pattern: <code>/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/</code></p>
+            <p style="color: #666; margin-bottom: 1rem;">Rule: YYYY-MM-DD format with valid day boundaries</p>
+            <div id="test-date"></div>
+        </div>
+
+        <!-- CATEGORY VALIDATION -->
+        <div class="test-suite">
+            <h2>4. Category Validation</h2>
+            <p>Pattern: <code>/^[A-Za-z]+(?:[ -][A-Za-z]+)*$/</code></p>
+            <p style="color: #666; margin-bottom: 1rem;">Rule: Letters, spaces, and hyphens only (no leading/trailing)</p>
+            <div id="test-category"></div>
+        </div>
+
+        <!-- ADVANCED: DUPLICATE WORDS -->
+        <div class="test-suite">
+            <h2>5. Advanced: Duplicate Word Detection</h2>
+            <p>Pattern: <code>/\b(\w+)\s+\1\b/</code></p>
+            <p style="color: #666; margin-bottom: 1rem;">Rule: Detects repeated consecutive words using back-reference</p>
+            <div id="test-duplicate"></div>
+        </div>
+
+        <!-- SEARCH PATTERNS -->
+        <div class="test-suite">
+            <h2>Bonus: Search Pattern Examples</h2>
+            <p style="color: #666; margin-bottom: 1rem;">Real-world regex patterns for user searches</p>
+            <div id="test-search"></div>
+        </div>
+    </div>
+
+    <script>
+        // Test utilities
+        function test(pattern, input, shouldPass) {
+            const result = pattern.test(input);
+            return result === shouldPass;
+        }
+
+        function renderTest(containerId, testCases) {
+            const container = document.getElementById(containerId);
+            let passed = 0;
+            let total = testCases.length;
+
+            testCases.forEach(tc => {
+                const pass = test(tc.pattern, tc.input, tc.shouldPass);
+                if (pass) passed++;
+
+                const testDiv = document.createElement('div');
+                testDiv.className = `test-case ${pass ? 'pass' : 'fail'}`;
+                testDiv.innerHTML = `
+                    <div class="test-label">${tc.label}</div>
+                    <div class="test-input">Input: <code>"${tc.input}"</code></div>
+                    <div class="test-input">Expected: ${tc.shouldPass ? '✓ Pass' : '✗ Fail'}</div>
+                    <div class="test-result">${pass ? '✓ PASS' : '✗ FAIL'}</div>
+                `;
+                container.appendChild(testDiv);
+            });
+
+            return { passed, total };
+        }
+
+        let totalPassed = 0;
+        let totalTests = 0;
+
+        // 1. Description Tests
+        const descriptionTests = [
+            { label: 'Valid: "Grocery shopping"', pattern: /^\S(?:.*\S)?$/, input: 'Grocery shopping', shouldPass: true },
+            { label: 'Valid: "Coffee"', pattern: /^\S(?:.*\S)?$/, input: 'Coffee', shouldPass: true },
+            { label: 'Invalid: " leading space"', pattern: /^\S(?:.*\S)?$/, input: ' leading space', shouldPass: false },
+            { label: 'Invalid: "trailing space "', pattern: /^\S(?:.*\S)?$/, input: 'trailing space ', shouldPass: false },
+            { label: 'Invalid: "  double  spaces  "', pattern: /^\S(?:.*\S)?$/, input: '  double  spaces  ', shouldPass: false },
+            { label: 'Valid: "Book-Store"', pattern: /^\S(?:.*\S)?$/, input: 'Book-Store', shouldPass: true },
+        ];
+        let r1 = renderTest('test-description', descriptionTests);
+        totalPassed += r1.passed;
+        totalTests += r1.total;
+
+        // 2. Amount Tests
+        const amountTests = [
+            { label: 'Valid: "12.50"', pattern: /^(0|[1-9]\d*)(\.\d{1,2})?$/, input: '12.50', shouldPass: true },
+            { label: 'Valid: "100"', pattern: /^(0|[1-9]\d*)(\.\d{1,2})?$/, input: '100', shouldPass: true },
+            { label: 'Valid: "0.99"', pattern: /^(0|[1-9]\d*)(\.\d{1,2})?$/, input: '0.99', shouldPass: true },
+            { label: 'Valid: "0"', pattern: /^(0|[1-9]\d*)(\.\d{1,2})?$/, input: '0', shouldPass: true },
+            { label: 'Invalid: "-5.50"', pattern: /^(0|[1-9]\d*)(\.\d{1,2})?$/, input: '-5.50', shouldPass: false },
+            { label: 'Invalid: "12.999"', pattern: /^(0|[1-9]\d*)(\.\d{1,2})?$/, input: '12.999', shouldPass: false },
+            { label: 'Invalid: "abc"', pattern: /^(0|[1-9]\d*)(\.\d{1,2})?$/, input: 'abc', shouldPass: false },
+            { label: 'Invalid: "12.5.5"', pattern: /^(0|[1-9]\d*)(\.\d{1,2})?$/, input: '12.5.5', shouldPass: false },
+        ];
+        let r2 = renderTest('test-amount', amountTests);
+        totalPassed += r2.passed;
+        totalTests += r2.total;
+
+        // 3. Date Tests
+        const dateTests = [
+            { label: 'Valid: "2025-09-25"', pattern: /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/, input: '2025-09-25', shouldPass: true },
+            { label: 'Valid: "2025-01-01"', pattern: /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/, input: '2025-01-01', shouldPass: true },
+            { label: 'Valid: "2025-12-31"', pattern: /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/, input: '2025-12-31', shouldPass: true },
+            { label: 'Invalid: "2025-13-01" (month > 12)', pattern: /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/, input: '2025-13-01', shouldPass: false },
+            { label: 'Invalid: "2025-00-15" (month = 0)', pattern: /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/, input: '2025-00-15', shouldPass: false },
+            { label: 'Invalid: "2025-09-32" (day > 31)', pattern: /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/, input: '2025-09-32', shouldPass: false },
+            { label: 'Invalid: "25/09/2025" (wrong format)', pattern: /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/, input: '25/09/2025', shouldPass: false },
+            { label: 'Invalid: "2025-9-5" (missing padding)', pattern: /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/, input: '2025-9-5', shouldPass: false },
+        ];
+        let r3 = renderTest('test-date', dateTests);
+        totalPassed += r3.passed;
+        totalTests += r3.total;
+
+        // 4. Category Tests
+        const categoryTests = [
+            { label: 'Valid: "Food"', pattern: /^[A-Za-z]+(?:[ -][A-Za-z]+)*$/, input: 'Food', shouldPass: true },
+            { label: 'Valid: "Entertainment"', pattern: /^[A-Za-z]+(?:[ -][A-Za-z]+)*$/, input: 'Entertainment', shouldPass: true },
+            { label: 'Valid: "Food-Entertainment"', pattern: /^[A-Za-z]+(?:[ -][A-Za-z]+)*$/, input: 'Food-Entertainment', shouldPass: true },
+            { label: 'Valid: "Student Books"', pattern: /^[A-Za-z]+(?:[ -][A-Za-z]+)*$/, input: 'Student Books', shouldPass: true },
+            { label: 'Invalid: "Food123"', pattern: /^[A-Za-z]+(?:[ -][A-Za-z]+)*$/, input: 'Food123', shouldPass: false },
+            { label: 'Invalid: " Food"', pattern: /^[A-Za-z]+(?:[ -][A-Za-z]+)*$/, input: ' Food', shouldPass: false },
+            { label: 'Invalid: "Food "', pattern: /^[A-Za-z]+(?:[ -][A-Za-z]+)*$/, input: 'Food ', shouldPass: false },
+            { label: 'Invalid: "Food--Double"', pattern: /^[A-Za-z]+(?:[ -][A-Za-z]+)*$/, input: 'Food--Double', shouldPass: false },
+        ];
+        let r4 = renderTest('test-category', categoryTests);
+        totalPassed += r4.passed;
+        totalTests += r4.total;
+
+        // 5. Duplicate Words Tests
+        const duplicateTests = [
+            { label: 'Match: "coffee coffee"', pattern: /\b(\w+)\s+\1\b/, input: 'coffee coffee', shouldPass: true },
+            { label: 'Match: "the the"', pattern: /\b(\w+)\s+\1\b/, input: 'the the', shouldPass: true },
+            { label: 'Match: "test test test"', pattern: /\b(\w+)\s+\1\b/, input: 'test test test', shouldPass: true },
+            { label: 'No match: "coffee tea"', pattern: /\b(\w+)\s+\1\b/, input: 'coffee tea', shouldPass: false },
+            { label: 'No match: "hello world"', pattern: /\b(\w+)\s+\1\b/, input: 'hello world', shouldPass: false },
+            { label: 'Match: "word  word"', pattern: /\b(\w+)\s+\1\b/, input: 'word  word', shouldPass: true },
+        ];
+        let r5 = renderTest('test-duplicate', duplicateTests);
+        totalPassed += r5.passed;
+        totalTests += r5.total;
+
+        // 6. Search Patterns
+        const searchTests = [
+            { label: 'Cents only: "12.50"', pattern: /\.\d{2}\b/, input: '12.50', shouldPass: true },
+            { label: 'No cents: "100"', pattern: /\.\d{2}\b/, input: '100', shouldPass: false },
+            { label: 'Beverage (case-insensitive): "Coffee"', pattern: /(coffee|tea)/i, input: 'Coffee', shouldPass: true },
+            { label: 'Beverage: "tea"', pattern: /(coffee|tea)/i, input: 'tea', shouldPass: true },
+            { label: 'Not beverage: "juice"', pattern: /(coffee|tea)/i, input: 'juice', shouldPass: false },
+            { label: 'Large amounts: "3500"', pattern: /^[1-9]\d{3,}/, input: '3500', shouldPass: true },
+            { label: 'Month filter: "2025-09"', pattern: /2025-09/, input: '2025-09-25', shouldPass: true },
+        ];
+        let r6 = renderTest('test-search', searchTests);
+        totalPassed += r6.passed;
+        totalTests += r6.total;
+
+        // Update stats
+        const statsDiv = document.getElementById('stats');
+        const passPercentage = Math.round((totalPassed / totalTests) * 100);
+        const statusColor = passPercentage === 100 ? '#51cf66' : passPercentage >= 90 ? '#ffd700' : '#ff6b6b';
+        statsDiv.innerHTML = `
+            <div class="stats-item">Total Tests: <strong>${totalTests}</strong></div>
+            <div class="stats-item">Passed: <strong style="color: #51cf66;">${totalPassed}</strong></div>
+            <div class="stats-item">Failed: <strong style="color: #ff6b6b;">${totalTests - totalPassed}</strong></div>
+            <div class="stats-item">Success Rate: <strong style="color: ${statusColor};">${passPercentage}%</strong></div>
+        `;
+    </script>
+</body>
+</html>
