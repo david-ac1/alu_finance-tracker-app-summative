@@ -7,111 +7,248 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!--Navigation and Header for App-->
-    <header>
-        <nav aria-label="Main Navigation">
-            <ul class="nav-list">
-                <li><a href="#dashboard" class="nav-link">Dashboard</a></li>
-                <li><a href="#records" class="nav-link">Records</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#add-transaction" class="nav-link">Transactions</a></li>
-                <li><a href="#settings" class="nav-link">Settings</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <!--Main Page Content-->
-    <main id="main-content">
-        <!-- Dashboard Section -->
-        <section id="dashboard" aria-labelledby="dashboard-heading">
-            <h1>Dashboard</h1>
-            <div class="cards">
-                <div class="card" id="total-spent">Total Spent: 0.00</div>
-                <div class="card" id="transaction-count">Transactions: 0</div>
-                <div class="card" id="top-category">Top Category: None yet</div>
+    <div class="container">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-branding">
+                    <div class="logo">MomoNoSwiping</div>
+                    <div class="tagline">Smart Finance Tracker</div>
+                </div>
             </div>
-        </section>
-        <!-- Records Section -->
-         <section id="records" aria-labelledby="records-heading">
-            <h1>Records</h1>
-            <input type="text" id="search-bar" placeholder="Search transactions..." aria-label="Search transactions">
-            <table id="records-table">
-                <thead>
-                    <tr>
-                        <th data-sort="description">Description</th>
-                        <th data-sort="amount">Amount</th>
-                        <th data-sort="category">Category</th>
-                        <th data-sort="date">Date</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Transactionn Records rows will be dynamically inserted here -->
-                </tbody>
-            </table>
-         </section>
 
-         <!-- Add/Edit Transaction Section -->
-        <section id="add-transaction">
-            <h1>Add Transaction</h1>
-            <form id="transaction-form">
-                <label for="description">Description</label>
-                <input type="text" id="description" name="description" required>
-                <small class="error" aria-live="polite"></small>
+            <div class="theme-toggle" id="theme-toggle">
+                <span class="toggle-label">Light</span>
+                <div class="toggle-switch" id="toggle-switch"></div>
+            </div>
 
-                <label for="amount">Amount</label>
-                <input type="number" id="amount" name="amount" step="0.01" required>
-                <small class="error" aria-live="polite"></small>
+            <nav class="main-nav">
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="#dashboard" class="nav-link active" data-section="dashboard">Dashboard</a></li>
+                    <li class="nav-item"><a href="#records" class="nav-link" data-section="records">Records</a></li>
+                    <li class="nav-item"><a href="#add-transaction" class="nav-link" data-section="add-transaction">Add Transaction</a></li>
+                    <li class="nav-item"><a href="#settings" class="nav-link" data-section="settings">Settings</a></li>
+                    <li class="nav-item"><a href="#about" class="nav-link" data-section="about">About</a></li>
+                </ul>
+            </nav>
 
-                <label for="category">Category</label>
-                <select id="category" name="category" required>
-                    <option value="">Select Category</option>
-                    <option value="Food">Food</option>
-                    <option value="Books">Books</option>
-                    <option value="Transport">Transport</option>
-                    <option value="Entertainment">Entertainment</option>
-                    <option value="Fees">Fees</option>
-                    <option value="Other">Other</option>
-                </select>
-                <small class="error" aria-live="polite"></small>
+            <footer class="sidebar-footer">
+                <p class="footer-text">Smart Finance Tracker</p>
+                <p class="footer-version">v2.0 Premium</p>
+            </footer>
+        </aside>
 
-                <label for="date">Date</label>
-                <input type="date" id="date" name="date" required>
-                <small class="error" aria-live="polite"></small>
+        <!-- MAIN CONTENT -->
+        <main id="main-content">
+            <!-- DASHBOARD SECTION -->
+            <section id="dashboard" class="active">
+                <div class="section-header">
+                    <h1 class="section-title">Financial Dashboard</h1>
+                    <p class="section-subtitle">Track your spending and reach your goals with insights</p>
+                </div>
 
-                <button type="submit">Save Transaction</button>
-                <button type="reset">Reset</button>
-            </form>
-        </section>
+                <div class="cards-grid">
+                    <div class="card" id="total-spent">
+                        <div class="card-label">Total Spent</div>
+                        <div class="card-value">$0.00</div>
+                        <div class="card-sublabel">from last month</div>
+                    </div>
 
-        <!-- Settings Section -->
-        <section id="settings">
-            <h1>Settings</h1>
-            <label for="base-currency">Base Currency</label>
-            <select id="base-currency">
-                <option value="USD">USD</option>
-                <option value="ZAR">ZAR</option>
-                <option value="CFA">RWF</option>
-            </select>
+                    <div class="card" id="transaction-count">
+                        <div class="card-label">Transactions</div>
+                        <div class="card-value">0</div>
+                        <div class="card-sublabel">total recorded</div>
+                    </div>
 
-            <label for="spending-cap">Spending Cap</label>
-            <input type="number" id="spending-cap" step="0.01">
+                    <div class="card" id="top-category">
+                        <div class="card-label">Top Category</div>
+                        <div class="card-value">N/A</div>
+                        <div class="card-sublabel">most spent</div>
+                    </div>
 
-            <button id="save-settings">Save Settings</button>
-        </section>
+                    <div class="card" id="spending-cap-card">
+                        <div class="card-label">Spending Cap</div>
+                        <div class="card-value">$0.00</div>
+                        <div class="card-sublabel">your limit</div>
+                    </div>
+                </div>
 
-        <!-- About Section -->
-        <section id="about">
-            <h1>About MomoNoSwiping</h1>
-            <p>A responsive Student Finance Tracker to monitor budgets, transactions, and spending habits.</p>
-            <p>Developer: David Achibiri | GitHub: <a href="https://github.com/david-ac1">david-ac1</a> | Email: <a href="mailto:davidachibiri8@gmail.com">davidachibiri8@gmail.com</a></p>
-        </section>
-    </main>
+                <div class="breakdown-container">
+                    <div class="breakdown-header">
+                        <div class="breakdown-title">Spending Breakdown</div>
+                        <p class="breakdown-subtitle">Your expense categories this month</p>
+                    </div>
+                    <div class="breakdown-bars" id="breakdown-bars">
+                        <p class="breakdown-empty">No transactions yet</p>
+                    </div>
+                </div>
+            </section>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2025 MomoNoSwiping. All rights reserved.</p>
-    </footer>
-    <script src="main.js" type="module"></script>
+            <!-- RECORDS SECTION -->
+            <section id="records">
+                <div class="section-header">
+                    <h1 class="section-title">Transaction Records</h1>
+                    <p class="section-subtitle">Keep detailed records of all your expenses with easy search and sort</p>
+                </div>
+
+                <div class="search-container">
+                    <input type="text" id="search-bar" class="search-input" placeholder="Search by description, category, or date...">
+                </div>
+
+                <div class="table-wrapper">
+                    <table id="records-table">
+                        <thead>
+                            <tr>
+                                <th data-sort="description">Description</th>
+                                <th data-sort="amount">Amount</th>
+                                <th data-sort="category">Category</th>
+                                <th data-sort="date">Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Transactions will be dynamically inserted here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- ADD TRANSACTION SECTION -->
+            <section id="add-transaction">
+                <div class="section-header">
+                    <h1 class="section-title">Add Transaction</h1>
+                    <p class="section-subtitle">Record a new expense or income</p>
+                </div>
+
+                <div class="form-container">
+                    <form id="transaction-form" class="transaction-form">
+                        <div class="form-group form-group-full">
+                            <label for="description" class="form-label">Description</label>
+                            <input type="text" id="description" name="description" class="form-input" placeholder="e.g., Grocery shopping" required>
+                            <small class="error-message" aria-live="polite"></small>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="amount" class="form-label">Amount</label>
+                                <input type="number" id="amount" name="amount" class="form-input" step="0.01" placeholder="0.00" required>
+                                <small class="error-message" aria-live="polite"></small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="currency" class="form-label">Currency</label>
+                                <select id="currency" name="currency" class="form-input">
+                                    <option value="USD">USD - US Dollar</option>
+                                    <option value="ZAR">ZAR - South African Rand</option>
+                                    <option value="RWF">RWF - Rwanda Franc</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="category" class="form-label">Category</label>
+                                <select id="category" name="category" class="form-input" required>
+                                    <option value="">Select a category</option>
+                                    <option value="Food">Food</option>
+                                    <option value="Books">Books</option>
+                                    <option value="Transport">Transport</option>
+                                    <option value="Entertainment">Entertainment</option>
+                                    <option value="Fees">Fees</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <small class="error-message" aria-live="polite"></small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="date" class="form-label">Date</label>
+                                <input type="date" id="date" name="date" class="form-input" required>
+                                <small class="error-message" aria-live="polite"></small>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="reset" class="btn-secondary">Clear</button>
+                            <button type="submit" class="btn-success">Save Transaction</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- SETTINGS SECTION -->
+            <section id="settings">
+                <div class="section-header">
+                    <h1 class="section-title">Settings</h1>
+                    <p class="section-subtitle">Manage your preferences and app configuration</p>
+                </div>
+
+                <div class="form-container">
+                    <div class="settings-section">
+                        <h2 class="settings-heading">General Settings</h2>
+
+                        <div class="form-group form-group-full">
+                            <label for="base-currency" class="form-label">Base Currency</label>
+                            <select id="base-currency" class="form-input">
+                                <option value="USD">USD - US Dollar</option>
+                                <option value="ZAR">ZAR - South African Rand</option>
+                                <option value="RWF">RWF - Rwanda Franc</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group form-group-full">
+                            <label for="spending-cap" class="form-label">Get alerts when you approach this limit</label>
+                            <input type="number" id="spending-cap" class="form-input" step="0.01" placeholder="0.00">
+                        </div>
+                    </div>
+
+                    <div class="form-actions settings-actions">
+                        <button id="save-settings" class="btn-success">Save Settings</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ABOUT SECTION -->
+            <section id="about">
+                <div class="section-header">
+                    <h1 class="section-title">About MomoNoSwiping</h1>
+                </div>
+
+                <div class="about-content">
+                    <p class="about-paragraph">MomoNoSwiping is your personal finance companion that helps you stay on top of your spending. Reckless spending is a thing of the past.</p>
+
+                    <div class="about-section">
+                        <h3 class="about-heading">Dashboard & Analytics</h3>
+                        <p class="about-paragraph">View your spending trends, top categories, and transaction history here.</p>
+                    </div>
+
+                    <div class="about-section">
+                        <h3 class="about-heading">Transaction Records</h3>
+                        <p class="about-paragraph">Keep detailed records of expenses with the search functionality.</p>
+                    </div>
+
+                    <div class="about-section">
+                        <h3 class="about-heading">Budget Management</h3>
+                        <p class="about-paragraph">Set spending caps and get insights on where your money goes.</p>
+                    </div>
+
+                    <div class="about-section">
+                        <h3 class="about-heading">Currency Conversion</h3>
+                        <p class="about-paragraph">Seamlessly convert between multiple currencies with custom exchange rates.</p>
+                    </div>
+
+                    <div class="about-footer">
+                        <div class="about-info">
+                            <p><strong>Developer:</strong> David Achibiri</p>
+                            <p><strong>GitHub:</strong> <a href="https://github.com/david-ac1" class="about-link">david-ac1</a></p>
+                            <p><strong>Email:</strong> <a href="mailto:davidachibiri8@gmail.com" class="about-link">davidachibiri8@gmail.com</a></p>
+                        </div>
+                        <p class="about-copyright">&copy; 2025 MomoNoSwiping. All rights reserved.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="main.js"></script>
 </body>
 </html>
