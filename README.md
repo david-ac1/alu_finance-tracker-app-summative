@@ -308,7 +308,7 @@ While not using ES modules, the code is organized by function:
 
 ## Demo Video
 
-[Watch Demo](https://youtu.be/uvxha8G2YkA) ← Replace with actual YouTube/unlisted link
+[Watch Demo](https://youtu.be/uvxha8G2YkA)
 
 **Demo Contents**:
 - Dashboard overview and spending breakdown
@@ -335,4 +335,5 @@ Educational use only. © 2025 David Achibiri.
 ---
 
 **Last Updated**: October 2025  
+
 
