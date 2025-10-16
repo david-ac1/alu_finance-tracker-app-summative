@@ -2,7 +2,6 @@
 const KEY = 'financeTrackerData';
 let state = { transactions: [] };
 
-// Load State from LocalStorage
 function loadState() {
     const savedState = localStorage.getItem(KEY);
     if (savedState) {
@@ -10,7 +9,6 @@ function loadState() {
     }
 }
 
-// Save State to LocalStorage
 function saveState() {
     localStorage.setItem(KEY, JSON.stringify(state.transactions));
 }
@@ -36,7 +34,6 @@ function saveSettings() {
     updateDashboard();
 }
 
-// ======= EVENT FOR SETTINGS SAVE =======
 document.getElementById('save-settings').addEventListener('click', saveSettings);
 
 // ===== THEME TOGGLE =====
@@ -101,16 +98,17 @@ function updateDashboard() {
     const total = state.transactions.reduce((sum, txn) => sum + parseFloat(txn.amount), 0);
     const count = state.transactions.length;
 
-    // Compute top spending category
-    const categoryCount = {};
+    // Group by category and sum amounts
+    const categoryTotals = {};
     state.transactions.forEach(txn => {
-        categoryCount[txn.category] = (categoryCount[txn.category] || 0) + 1;
+        categoryTotals[txn.category] = (categoryTotals[txn.category] || 0) + parseFloat(txn.amount);
     });
 
+    // Get top spending category (by total amount, not frequency)
     const topCategoryName = count === 0
         ? 'N/A'
-        : Object.keys(categoryCount).reduce((a, b) =>
-            categoryCount[a] > categoryCount[b] ? a : b
+        : Object.keys(categoryTotals).reduce((a, b) =>
+            categoryTotals[a] > categoryTotals[b] ? a : b
         );
 
     const currencySymbol = getCurrencySymbol(settings.currency);
@@ -127,7 +125,6 @@ function updateDashboard() {
         totalSpent.classList.remove('alert');
     }
 
-    // Update spending breakdown
     updateSpendingBreakdown();
 }
 
@@ -148,14 +145,16 @@ function updateSpendingBreakdown() {
         categoryTotals[txn.category] = (categoryTotals[txn.category] || 0) + parseFloat(txn.amount);
     });
 
-    // Find max for percentage calculation
-    const maxAmount = Math.max(...Object.values(categoryTotals));
+    // Calculate total spending
+    const totalSpending = Object.values(categoryTotals).reduce((sum, amount) => sum + amount, 0);
 
-    // Build breakdown
-    breakdownBars.innerHTML = Object.entries(categoryTotals)
-        .sort((a, b) => b[1] - a[1])
+    // Sort by amount (highest first)
+    const sorted = Object.entries(categoryTotals).sort((a, b) => b[1] - a[1]);
+
+    // Build breakdown bars with percentages of total
+    breakdownBars.innerHTML = sorted
         .map(([category, amount]) => {
-            const percentage = (amount / maxAmount) * 100;
+            const percentage = (amount / totalSpending) * 100;
             return `
                 <div class="breakdown-item">
                     <div class="breakdown-label">${category}</div>
@@ -283,7 +282,6 @@ document.querySelector('#records-table tbody').addEventListener('click', functio
         renderTransactions();
         updateDashboard();
 
-        // Scroll to form
         document.getElementById('add-transaction').scrollIntoView({ behavior: 'smooth' });
     }
 });
