@@ -355,3 +355,72 @@ function init() {
 }
 
 init();
+
+// ======= IMPORT / EXPORT JSON & CSV =======
+const importInput = document.getElementById('import-json');
+
+importInput.addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(event) {
+        try {
+            const importedData = JSON.parse(event.target.result);
+
+            if (!Array.isArray(importedData)) {
+                throw new Error('JSON must be an array of transactions.');
+            }
+
+            // Optional: merge or replace
+            state.transactions = [...state.transactions, ...importedData];
+
+            saveState();
+            renderTransactions();
+            updateDashboard();
+
+            alert('Transactions imported successfully!');
+        } catch (err) {
+            alert('Error reading JSON: ' + err.message);
+        } finally {
+            importInput.value = ''; // reset file input
+        }
+    };
+    reader.readAsText(file);
+});
+
+document.getElementById('export-json').addEventListener('click', () => {
+    if (!state.transactions.length) return alert('No transactions to export.');
+
+    const blob = new Blob([JSON.stringify(state.transactions, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'transactions.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+});
+
+document.getElementById('export-csv').addEventListener('click', () => {
+    if (!state.transactions.length) return alert('No transactions to export.');
+
+    const headers = ['id','description','amount','category','date','createdAt','updatedAt'];
+    const csvRows = [headers.join(',')];
+
+    state.transactions.forEach(txn => {
+        const row = headers.map(h => `"${txn[h]}"`).join(',');
+        csvRows.push(row);
+    });
+
+    const blob = new Blob([csvRows.join('\n')], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'transactions.csv';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+});
