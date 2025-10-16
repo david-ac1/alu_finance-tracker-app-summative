@@ -1,5 +1,6 @@
 ﻿# alu_finance-tracker-app-summative
-# MomoNoSwiping - Student Finance Tracker
+# MomoNoSwiping - Student Finance Tracker [App:(https://david-ac1.github.io/alu_finance-tracker-app-summative/)]
+#Repo: https://github.com/david-ac1/alu_finance-tracker-app-summative/
 
 A responsive, accessible vanilla HTML/CSS/JavaScript finance tracking application for students to monitor spending, categorize expenses, and manage budgets with ease.
 
@@ -335,5 +336,6 @@ Educational use only. © 2025 David Achibiri.
 ---
 
 **Last Updated**: October 2025  
+
 
 
